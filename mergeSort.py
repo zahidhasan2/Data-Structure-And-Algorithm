@@ -1,0 +1,43 @@
+# Merge Sort Algorithm Implementation in Python
+def mergeSort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    leftHalf = arr[:mid]
+    rightHalf = arr[mid:]
+
+    sortedLeft = mergeSort(leftHalf)
+    sortedRight = mergeSort(rightHalf)
+
+    return merge(sortedLeft, sortedRight)
+
+#first merge left array and right array
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    if i < len(left):
+        while i < len(left):
+            result.append(left[i])
+            i+=1
+            
+    if j < len(right):
+        while j < len(right):
+            result.append(right[j])
+            j+=1
+    # Short approach
+    # result.extend(left[i:])
+    # result.extend(right[j:])
+
+    return result
+
+unsortedArr = [3, 7, 6, -10, 15, 23.5, 55, -13]
+sortedArr = mergeSort(unsortedArr)
+print("Sorted array:", sortedArr)
